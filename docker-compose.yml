@@ -2,11 +2,7 @@ version: '3.8'
 
 services:
   sermon-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: sermon-app
-    restart: always
+    image: ghcr.io/orakysec/sermon-app:latest
     ports:
       - "3000:3000"
     environment:
