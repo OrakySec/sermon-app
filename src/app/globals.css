@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #0b1d39;
+  --color-accent-gold: #d4af37;
+  --color-accent-yellow: #f4cf47;
+  --color-light-gray: #f9fafb;
+  --font-playfair: var(--font-playfair);
+  --font-inter: var(--font-inter);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b1d39;
+  --font-inter: "Inter", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair);
+}
+
+.bg-hero-gradient {
+  background: radial-gradient(circle at center, #0f2649 0%, #0b1d39 100%);
+}
+
+.btn-gold-gradient {
+  background: linear-gradient(to right, #d4af37, #f4cf47);
+  transition: all 0.3s ease;
+}
+
+.btn-gold-gradient:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
