@@ -1,7 +1,25 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { AlarmClock, Download, Sparkles, Shield, Clock, CreditCard, CheckCircle2, Lock, CheckSquare } from "lucide-react";
 
 export default function Pricing() {
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutos = 300 segundos
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    
+    const intervalId = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+    
+    return () => clearInterval(intervalId);
+  }, [timeLeft]);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   return (
     <section id="pricing" className="py-20 bg-white font-sans">
       <div className="container mx-auto px-6 max-w-[1100px] flex flex-col items-center">
@@ -9,7 +27,7 @@ export default function Pricing() {
         {/* Top Countdown Badge */}
         <div className="bg-[#f07b7b] text-white px-5 py-2 rounded-full font-bold text-sm md:text-base flex items-center gap-2 mb-6 shadow-sm">
           <AlarmClock size={18} />
-          <span>Le prix promotionnel prend fin dans : 04:19</span>
+          <span suppressHydrationWarning>Le prix promotionnel prend fin dans : {formattedTime}</span>
         </div>
 
         {/* Title Section */}
