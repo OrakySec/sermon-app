@@ -14,7 +14,7 @@ services:
         - "traefik.http.routers.sermon-app.rule=Host(`sermon.ykaromarques.com`)"
         - "traefik.http.routers.sermon-app.entrypoints=websecure"
         - "traefik.http.routers.sermon-app.tls=true"
-        - "traefik.http.routers.sermon-app.tls.certresolver=letsencrypt"
+        - "traefik.http.routers.sermon-app.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.sermon-app.loadbalancer.server.port=3000"
 
 networks:
