@@ -5,7 +5,10 @@ services:
   # Aplicação Next.js (Sermon App)
   # ──────────────────────────────────────────────────────────────────────────────
   app:
-    image: ghcr.io/orakysec/sermon-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sermon-app:latest
     networks:
       - YkaroNET
     deploy:
