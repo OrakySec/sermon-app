@@ -33,11 +33,12 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           
           {/* Text Content - Left Side */}
-          <div className="lg:w-[50%] text-white flex flex-col items-start pt-4">
+          <div className="lg:w-[50%] text-white flex flex-col items-center lg:items-start pt-4 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="flex flex-col items-center lg:items-start"
             >
               {/* Red Badge with pulsing effect */}
               {today && (
@@ -68,20 +69,20 @@ export default function Hero() {
               </p>
 
               {/* CTA Button */}
-              <a href="#benefits" className="bg-[#D4AF37] hover:brightness-110 text-[#0f1f33] px-8 py-3.5 rounded-full text-[18px] font-bold flex items-center justify-center w-max gap-3 transition-transform shadow-xl hover:scale-105 active:scale-95 font-sans">
-                <span className="text-[22px]">👉</span>
+              <a href="#benefits" className="bg-[#D4AF37] hover:brightness-110 text-[#0f1f33] px-6 lg:px-8 py-3.5 rounded-full text-[16px] lg:text-[18px] font-bold flex items-center justify-center w-full sm:w-max gap-3 transition-transform shadow-xl hover:scale-105 active:scale-95 font-sans">
+                <span className="text-[20px] lg:text-[22px]">👉</span>
                 Accédez dès maintenant aux 300 sermons.
               </a>
             </motion.div>
           </div>
 
           {/* Mockup Image - Right Side */}
-          <div className="lg:w-[45%] flex justify-end relative">
+          <div className="lg:w-[45%] flex justify-center lg:justify-end relative mt-12 lg:mt-0 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full max-w-[650px] mr-[-5%]"
+              className="relative w-full max-w-[450px] lg:max-w-[650px] lg:mr-[-5%]"
             >
               <Image
                 src="/hero-mockup-v2.png"
