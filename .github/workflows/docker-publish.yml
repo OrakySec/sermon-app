@@ -1,44 +1,42 @@
-name: Build, Push & Deploy
+name: Build and Publish Docker Image
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main", "master" ]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  PORTAINER_URL: https://portainer.ykaromarques.com
-  PORTAINER_STACK_ID: 19
-  PORTAINER_ENDPOINT_ID: 1
+  # Define o nome da imagem forçando minúsculas para evitar erros no GHCR
+  IMAGE_NAME: ${{ github.repository_owner }}/sermon-app
 
 jobs:
-  build-and-push:
-    name: Build and Push to GHCR
+  build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+      attestations: write
+      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Log in to GitHub Container Registry
+      - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract Docker metadata (tags, labels)
+      - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,prefix=sha-
+            type=raw,value=latest
+            type=sha,format=short
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -52,41 +50,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  redeploy-portainer:
-    name: Redeploy Stack on Portainer
-    runs-on: ubuntu-latest
-    needs: build-and-push
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Redeploy stack on Portainer
-        run: |
-          echo "📦 Sending updated stack to Portainer (Stack ID: ${{ env.PORTAINER_STACK_ID }})..."
-
-          # Lê o docker-compose.yml e monta o payload JSON com ele
-          STACK_CONTENT=$(cat docker-compose.yml | jq -Rs .)
-
-          PAYLOAD=$(jq -n \
-            --argjson stackFileContent "$STACK_CONTENT" \
-            '{stackFileContent: $stackFileContent, prune: false, pullImage: true}')
-
-          HTTP_STATUS=$(curl --silent --output /tmp/portainer_response.json \
-            --write-out "%{http_code}" \
-            --request PUT \
-            --url "${{ env.PORTAINER_URL }}/api/stacks/${{ env.PORTAINER_STACK_ID }}?endpointId=${{ env.PORTAINER_ENDPOINT_ID }}" \
-            --header "X-API-Key: ${{ secrets.PORTAINER_TOKEN }}" \
-            --header "Content-Type: application/json" \
-            --data "$PAYLOAD")
-
-          echo "HTTP Status: $HTTP_STATUS"
-          cat /tmp/portainer_response.json
-
-          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 300 ]; then
-            echo "✅ Portainer redeploy triggered successfully!"
-          else
-            echo "❌ Portainer redeploy failed with status $HTTP_STATUS"
-            exit 1
-          fi
