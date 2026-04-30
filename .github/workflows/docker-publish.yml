@@ -8,6 +8,9 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  PORTAINER_URL: https://portainer.ykaromarques.com
+  PORTAINER_STACK_ID: 19
+  PORTAINER_ENDPOINT_ID: 1
 
 jobs:
   build-and-push:
@@ -56,16 +59,34 @@ jobs:
     needs: build-and-push
 
     steps:
-      - name: Trigger Portainer Stack Redeploy
-        run: |
-          echo "Triggering redeploy of stack ID ${{ secrets.PORTAINER_STACK_ID }}..."
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-          RESPONSE=$(curl --silent --show-error --fail \
+      - name: Redeploy stack on Portainer
+        run: |
+          echo "📦 Sending updated stack to Portainer (Stack ID: ${{ env.PORTAINER_STACK_ID }})..."
+
+          # Lê o docker-compose.yml e monta o payload JSON com ele
+          STACK_CONTENT=$(cat docker-compose.yml | jq -Rs .)
+
+          PAYLOAD=$(jq -n \
+            --argjson stackFileContent "$STACK_CONTENT" \
+            '{stackFileContent: $stackFileContent, prune: false, pullImage: true}')
+
+          HTTP_STATUS=$(curl --silent --output /tmp/portainer_response.json \
+            --write-out "%{http_code}" \
             --request PUT \
-            --url "${{ secrets.PORTAINER_URL }}/api/stacks/${{ secrets.PORTAINER_STACK_ID }}/git/redeploy?endpointId=${{ secrets.PORTAINER_ENDPOINT_ID }}" \
+            --url "${{ env.PORTAINER_URL }}/api/stacks/${{ env.PORTAINER_STACK_ID }}?endpointId=${{ env.PORTAINER_ENDPOINT_ID }}" \
             --header "X-API-Key: ${{ secrets.PORTAINER_TOKEN }}" \
             --header "Content-Type: application/json" \
-            --data '{"pullImage": true}')
+            --data "$PAYLOAD")
 
-          echo "Portainer response: $RESPONSE"
-          echo "✅ Redeploy triggered successfully!"
+          echo "HTTP Status: $HTTP_STATUS"
+          cat /tmp/portainer_response.json
+
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 300 ]; then
+            echo "✅ Portainer redeploy triggered successfully!"
+          else
+            echo "❌ Portainer redeploy failed with status $HTTP_STATUS"
+            exit 1
+          fi
