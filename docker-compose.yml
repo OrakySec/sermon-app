@@ -1,20 +1,17 @@
-version: '3.8'
+version: "3.9"
+
+# Docker Compose para PRODUÇÃO com Traefik
+# Rede Traefik: YkaroNET
+# Certresolver: letsencryptresolver
+# Imagem hospedada no GitHub Container Registry (ghcr.io)
 
 services:
   sermon-app:
     image: ghcr.io/orakysec/sermon-app:latest
+    restart: always
     networks:
       - YkaroNET
     deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: start-first
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=YkaroNET"
@@ -22,6 +19,7 @@ services:
         - "traefik.http.routers.sermon-app.entrypoints=websecure"
         - "traefik.http.routers.sermon-app.tls=true"
         - "traefik.http.routers.sermon-app.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.sermon-app.tls.domains[0].main=sermon.ykaromarques.com"
         - "traefik.http.services.sermon-app.loadbalancer.server.port=3000"
 
 networks:
