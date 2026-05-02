@@ -45,33 +45,33 @@ export default function Hero() {
                 <motion.div 
                   animate={{ backgroundColor: ["#b03a3d", "#d14b4e", "#b03a3d"] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                  className="inline-block text-[#f8dada] px-5 py-2 rounded-[50px] text-[15px] font-bold mb-8 tracking-wide font-sans shadow-lg"
+                  className="inline-block text-[#f8dada] px-5 py-2.5 rounded-[50px] text-[14px] sm:text-[15px] font-bold mb-8 tracking-wide font-sans shadow-lg leading-snug"
                 >
-                  Remise valable aujourd'hui seulement : {today}
+                  Remise valable aujourd'hui seulement&nbsp;: {today}
                 </motion.div>
               )}
 
               {/* Main Headline */}
-              <h1 style={{ fontFamily: "Georgia, serif" }} className="text-[44px] md:text-[54px] lg:text-[62px] font-bold leading-[1.05] mb-6 tracking-tight">
+              <h1 style={{ fontFamily: "Georgia, serif" }} className="text-[38px] sm:text-[44px] md:text-[54px] lg:text-[62px] font-bold leading-[1.05] mb-6 tracking-tight px-2 sm:px-0">
                 300 Plans de <br />
                 Prédications <br />
-                <span className="text-[#D4AF37]">Prêts à l'Emploi !</span>
+                <span className="text-[#D4AF37]">Prêts à l'Emploi&nbsp;!</span>
               </h1>
               
               {/* Subheadline 1 */}
-              <h2 style={{ fontFamily: "Georgia, serif" }} className="text-[22px] md:text-[28px] font-bold text-[#D4AF37] mb-8 leading-snug">
+              <h2 style={{ fontFamily: "Georgia, serif" }} className="text-[20px] sm:text-[22px] md:text-[28px] font-bold text-[#D4AF37] mb-8 leading-snug px-4 sm:px-0">
                 Prêchez avec assurance et puissance.
               </h2>
 
               {/* Subheadline 2 */}
-              <p className="text-[17px] md:text-[19px] text-[#b3c5db] mb-10 max-w-xl leading-relaxed font-sans font-medium">
-                Ne manquez plus jamais une parole qui transforme les vies !
+              <p className="text-[16px] sm:text-[17px] md:text-[19px] text-[#b3c5db] mb-10 max-w-xl leading-relaxed font-sans font-medium px-4 sm:px-0">
+                Ne manquez plus jamais une parole qui transforme les vies&nbsp;!
               </p>
 
               {/* CTA Button */}
-              <a href="#benefits" className="bg-[#D4AF37] hover:brightness-110 text-[#0f1f33] px-6 lg:px-8 py-3.5 rounded-full text-[16px] lg:text-[18px] font-bold flex items-center justify-center w-full sm:w-max gap-3 transition-transform shadow-xl hover:scale-105 active:scale-95 font-sans">
-                <span className="text-[20px] lg:text-[22px]">👉</span>
-                Accédez dès maintenant aux 300 sermons.
+              <a href="#benefits" className="bg-[#D4AF37] hover:brightness-110 text-[#0f1f33] px-5 sm:px-6 lg:px-8 py-4 rounded-full text-[17px] md:text-[18px] font-bold flex items-center justify-center w-full sm:w-max gap-3 transition-transform shadow-xl hover:scale-105 active:scale-95 font-sans leading-tight">
+                <span className="text-[20px] lg:text-[22px] flex-shrink-0">👉</span>
+                <span className="text-center">Accédez dès maintenant aux 300 sermons.</span>
               </a>
             </motion.div>
           </div>
