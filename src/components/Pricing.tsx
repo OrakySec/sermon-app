@@ -104,13 +104,13 @@ export default function Pricing() {
                   onClick={() => {
                     const eventId = "evt_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
                     if (typeof window !== 'undefined' && (window as any).fbq) {
-                      (window as any).fbq('track', 'InitiateCheckout', {}, { eventID: eventId });
+                      (window as any).fbq('trackCustom', 'ClickCheckoutCTA', {}, { eventID: eventId });
                     }
                     fetch('/api/capi', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
-                        eventName: 'InitiateCheckout',
+                        eventName: 'ClickCheckoutCTA',
                         eventId: eventId,
                         eventUrl: window.location.href,
                         userAgent: navigator.userAgent
