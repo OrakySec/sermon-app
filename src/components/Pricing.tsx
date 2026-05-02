@@ -99,7 +99,26 @@ export default function Pricing() {
 
               {/* CTA Button */}
               <div className="w-full flex flex-col items-center">
-                <a href="https://pay.hotmart.com/B105602483X" className="w-full bg-[#16a34a] hover:bg-[#15803d] text-white px-8 py-5 rounded-[20px] text-[20px] md:text-[22px] font-bold flex items-center justify-center gap-3 transition-transform shadow-[0_10px_25px_rgba(22,163,74,0.3)] hover:scale-[1.02] active:scale-[0.98]">
+                <a 
+                  href="https://pay.hotmart.com/B105602483X" 
+                  onClick={() => {
+                    const eventId = "evt_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+                    if (typeof window !== 'undefined' && (window as any).fbq) {
+                      (window as any).fbq('track', 'InitiateCheckout', {}, { eventID: eventId });
+                    }
+                    fetch('/api/capi', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        eventName: 'InitiateCheckout',
+                        eventId: eventId,
+                        eventUrl: window.location.href,
+                        userAgent: navigator.userAgent
+                      })
+                    }).catch(console.error);
+                  }}
+                  className="w-full bg-[#16a34a] hover:bg-[#15803d] text-white px-8 py-5 rounded-[20px] text-[20px] md:text-[22px] font-bold flex items-center justify-center gap-3 transition-transform shadow-[0_10px_25px_rgba(22,163,74,0.3)] hover:scale-[1.02] active:scale-[0.98]"
+                >
                   <CheckSquare size={24} />
                   Obtenir un accès immédiat
                 </a>

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "300 Plans de Prédications Prêts à l'Emploi !",
   description: "Des messages inspirés, structurés et prêts à être prêchés pour transformer votre congrégation.",
 };
+import Tracking from "@/components/Tracking";
 
 export default function RootLayout({
   children,
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <body className="antialiased">
+        <Tracking />
         {children}
       </body>
     </html>
