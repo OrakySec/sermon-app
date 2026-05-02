@@ -43,13 +43,14 @@ export default function ExitIntentPopup() {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest("a");
-      if (link && link.href && link.href.includes("pay.hotmart.com")) {
+      if (link) {
+        // Marca como clicado para ignorar o gatilho por um tempo (navegação interna ou CTA)
         (window as any).isCTAClicked = true;
+        setTimeout(() => {
+          (window as any).isCTAClicked = false;
+        }, 1000);
       }
     };
-
-    // Empurra um estado no histórico para conseguirmos interceptar o voltar do celular
-    window.history.pushState(null, "", window.location.href);
 
     document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("popstate", handlePopState);
