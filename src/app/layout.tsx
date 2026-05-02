@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Des messages inspirés, structurés et prêts à être prêchés pour transformer votre congrégation.",
 };
 import Tracking from "@/components/Tracking";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="fr" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
       <body className="antialiased">
         <Tracking />
+        <ExitIntentPopup />
         {children}
       </body>
     </html>
