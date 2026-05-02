@@ -76,7 +76,7 @@ export default function Pricing() {
                 </div>
                 <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-[18px]">
                   <span>💰</span>
-                  <span>Économisez $20,00 aujourd'hui !</span>
+                  <span>Économisez $20,00 aujourd'hui&nbsp;!</span>
                 </div>
               </div>
 

@@ -15,7 +15,7 @@ export default function Bonus() {
           <h2 style={{ fontFamily: "Georgia, serif" }} className="text-[34px] md:text-[46px] font-bold leading-tight">
             <span className="text-white">Bonus Exclusif</span>
             <br />
-            <span className="text-[#D4AF37]">Offert Aujourd'hui !</span>
+            <span className="text-[#D4AF37]">Offert Aujourd'hui&nbsp;!</span>
           </h2>
         </div>
 

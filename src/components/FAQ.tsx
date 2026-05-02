@@ -7,7 +7,7 @@ const faqs = [
   {
     icon: Smartphone,
     question: "Puis-je y accéder depuis mon téléphone ?",
-    answer: "Absolument ! Le contenu est 100 % compatible avec tous les appareils : smartphones, tablettes, ordinateurs. Vous pouvez consulter vos plans de prédication où que vous soyez, à tout moment."
+    answer: "Absolument\u00A0! Le contenu est 100 % compatible avec tous les appareils : smartphones, tablettes, ordinateurs. Vous pouvez consulter vos plans de prédication où que vous soyez, à tout moment."
   },
   {
     icon: Shield,
@@ -17,7 +17,7 @@ const faqs = [
   {
     icon: Headphones,
     question: "Ai-je droit à une assistance si j'ai des questions ?",
-    answer: "Bien sûr ! Notre équipe est disponible pour vous accompagner. Si vous rencontrez un problème ou avez une question sur le contenu, contactez-nous et nous vous aiderons rapidement."
+    answer: "Bien sûr\u00A0! Notre équipe est disponible pour vous accompagner. Si vous rencontrez un problème ou avez une question sur le contenu, contactez-nous et nous vous aiderons rapidement."
   }
 ];
 
@@ -86,7 +86,7 @@ export default function FAQ() {
           </p>
           <a href="https://pay.hotmart.com/B105602483X" className="w-full md:w-auto bg-[#16a34a] hover:bg-[#15803d] text-white px-8 md:px-12 py-5 rounded-full text-[18px] md:text-[20px] font-bold flex items-center justify-center gap-3 transition-transform shadow-[0_10px_25px_rgba(22,163,74,0.3)] hover:scale-[1.02] active:scale-[0.98] mb-4">
             <CheckSquare size={24} />
-            Vous avez répondu à mes questions, allons-y !
+            Vous avez répondu à mes questions, allons-y\u00A0!
           </a>
           <p className="text-[#9ca3af] text-[14px] md:text-[15px] font-medium">
             Accès immédiat après votre commande
