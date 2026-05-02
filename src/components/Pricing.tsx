@@ -100,7 +100,7 @@ export default function Pricing() {
               {/* CTA Button */}
               <div className="w-full flex flex-col items-center">
                 <a 
-                  href="https://pay.hotmart.com/B105602483X" 
+                  href="https://pay.hotmart.com/B105602483X?checkoutMode=10"
                   onClick={() => {
                     const eventId = "evt_" + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
                     if (typeof window !== 'undefined' && (window as any).fbq) {

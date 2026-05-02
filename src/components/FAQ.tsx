@@ -84,7 +84,7 @@ export default function FAQ() {
           <p className="text-[#6b7280] text-[18px] font-medium mb-6">
             Toutes vos questions ont trouvé réponse ?
           </p>
-          <a href="https://pay.hotmart.com/B105602483X" className="w-full md:w-auto bg-[#16a34a] hover:bg-[#15803d] text-white px-8 md:px-12 py-5 rounded-full text-[18px] md:text-[20px] font-bold flex items-center justify-center gap-3 transition-transform shadow-[0_10px_25px_rgba(22,163,74,0.3)] hover:scale-[1.02] active:scale-[0.98] mb-4">
+          <a href="https://pay.hotmart.com/B105602483X?checkoutMode=10" className="w-full md:w-auto bg-[#16a34a] hover:bg-[#15803d] text-white px-8 md:px-12 py-5 rounded-full text-[18px] md:text-[20px] font-bold flex items-center justify-center gap-3 transition-transform shadow-[0_10px_25px_rgba(22,163,74,0.3)] hover:scale-[1.02] active:scale-[0.98] mb-4">
             <CheckSquare size={24} />
             Vous avez répondu à mes questions, allons-y\u00A0!
           </a>
