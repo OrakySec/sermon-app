@@ -32,10 +32,15 @@ export default function ExitIntentPopup() {
     };
 
     const handlePopState = () => {
-      // Se apertar o botão de voltar no mobile
-      if (!hasTriggered && !(window as any).isCTAClicked) {
-        triggerPopup();
-        // Readiciona o estado para impedir que volte de fato
+      // Se o usuário clicou em algum link interno recentemente, ignoramos o gatilho de voltar
+      if ((window as any).isCTAClicked) return;
+
+      if (!hasTriggered) {
+        setIsOpen(true);
+        setHasTriggered(true);
+        sessionStorage.setItem("exitPopupShown", "true");
+        document.body.style.overflow = "hidden";
+        // Empurra o estado novamente para que o popup permaneça aberto e o usuário precise clicar de novo para sair
         window.history.pushState(null, "", window.location.href);
       }
     };
@@ -44,13 +49,17 @@ export default function ExitIntentPopup() {
       const target = e.target as HTMLElement;
       const link = target.closest("a");
       if (link) {
-        // Marca como clicado para ignorar o gatilho por um tempo (navegação interna ou CTA)
+        // Marca como clicado para ignorar o gatilho (importante para âncoras # e links externos)
         (window as any).isCTAClicked = true;
+        // Tempo de segurança para a navegação ocorrer sem disparar o popstate
         setTimeout(() => {
           (window as any).isCTAClicked = false;
-        }, 1000);
+        }, 1500);
       }
     };
+
+    // Estratégia para Mobile: Empurra um estado no histórico para interceptar o botão "Voltar"
+    window.history.pushState(null, "", window.location.href);
 
     document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("popstate", handlePopState);
