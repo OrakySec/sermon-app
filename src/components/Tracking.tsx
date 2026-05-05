@@ -53,6 +53,18 @@ export default function Tracking() {
           })(window, document, "clarity", "script", "wkuj7uoxh5");
         `}
       </Script>
+
+      {/* Google tag (gtag.js) */}
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-18137688084" strategy="afterInteractive" />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-18137688084');
+        `}
+      </Script>
     </>
   );
 }
