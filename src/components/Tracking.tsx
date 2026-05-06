@@ -63,6 +63,12 @@ export default function Tracking() {
           gtag('js', new Date());
 
           gtag('config', 'AW-18137688084');
+
+          gtag('event', 'conversion', {
+              'send_to': 'AW-18137688084/-dSnCPKEyqgcEJTQ3MhD',
+              'value': 1.0,
+              'currency': 'BRL'
+          });
         `}
       </Script>
     </>
